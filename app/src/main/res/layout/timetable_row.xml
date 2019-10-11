@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="center_vertical">
+
+
+    <!-- Lecture times -->
+    <LinearLayout   android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Start time -->
+        <TextView android:id="@+id/timetable_row_lecture_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="8:00   AM"/>
+
+        <!-- End time -->
+        <TextView android:id="@+id/timetable_row_lecture_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 AM"/>
+    </LinearLayout>
+
+    <!-- Blue Line margin -->
+    <View android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@android:color/holo_blue_dark"/>
+
+
+    <!-- Lecture information -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="vertical">
+
+        <!-- Lecture Title Name -->
+        <TextView
+            android:id="@+id/timetable_row_lecture_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="FIT1031 Lecture 01"
+            android:textSize="14sp"
+            android:textColor="#222"
+            android:textStyle="bold"/>
+
+        <!-- Lecturer's name -->
+        <TextView
+            android:id="@+id/timetable_row_lecture_mentor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Arun Kongaurthu"
+            android:textSize="12sp"
+            android:textColor="#444"/>
+
+        <!-- Lecture Location -->
+        <TextView
+            android:id="@+id/timetable_row_lecture_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S4, 13 College Walk, Clayton"
+            android:textSize="12sp"
+            android:textColor="#444"/>
+    </LinearLayout>
+
+
+</LinearLayout>
