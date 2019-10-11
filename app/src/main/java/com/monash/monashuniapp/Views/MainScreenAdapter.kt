@@ -1,14 +1,19 @@
 package com.monash.monashuniapp.Views
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
 import android.widget.LinearLayout
+import android.widget.ListView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.monash.monashuniapp.Models.BusList
 import com.monash.monashuniapp.Models.CarParkList
+import com.monash.monashuniapp.Models.Lecture
 import com.monash.monashuniapp.Models.LectureList
 import com.monash.monashuniapp.R
 
@@ -17,6 +22,81 @@ class MainScreenAdapter(// Internal data
     private val carParkList: CarParkList,
     private val busList: BusList
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+
+    class TimeTableViewHolder(itemView: View, private val llist: LectureList) :
+        RecyclerView.ViewHolder(itemView) {
+        private val ttList: ListView
+
+
+        init {
+
+            ttList = itemView.findViewById(R.id.timetable_lecture_list)
+            ttList.adapter = TimeTableAdapter(itemView.context)
+        }
+
+        // Internal Adapter for the timetable
+        private inner class TimeTableAdapter(private val context: Context) : BaseAdapter() {
+
+            override fun getCount(): Int {
+                return llist.response.size
+            }
+
+            override fun getItem(position: Int): Any {
+                return llist.response[position]
+            }
+
+            override fun getItemId(position: Int): Long {
+                return position.toLong()
+            }
+
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                var convertView = convertView
+                // inflate the layout for each list row
+                if (convertView == null) {
+                    convertView =
+                        LayoutInflater.from(context).inflate(R.layout.timetable_row, parent, false)
+
+                    // Tag the view id's so we don't unnecessarily look for them again in future if this object is not null...
+                    val vhx = ViewHolder()
+                    vhx.setIds(convertView!!)
+                    convertView.tag = vhx
+                }
+
+                drawRow(convertView, llist.response[position])
+
+                // returns the view for the current row
+                return convertView
+            }
+
+            private fun drawRow(view: View, lecture: Lecture) {
+                val vh = view.tag as ViewHolder
+                vh.startTime!!.text = lecture.startTime
+                vh.endTime!!.text = lecture.endTime
+                vh.lectureTitle!!.text = lecture.lectureTitleName
+                vh.lecturerName!!.text = lecture.lecturerName
+                vh.lectureLocation!!.text = lecture.location
+            }
+
+            inner class ViewHolder {
+                var startTime: TextView? = null
+                var endTime: TextView? = null
+                var lectureTitle: TextView? = null
+                var lecturerName: TextView? = null
+                var lectureLocation: TextView? = null
+
+                internal fun setIds(target: View) {
+                    startTime = target.findViewById(R.id.timetable_row_lecture_start_time)
+                    endTime = target.findViewById(R.id.timetable_row_lecture_end_time)
+                    lectureTitle = target.findViewById(R.id.timetable_row_lecture_title)
+                    lecturerName = target.findViewById(R.id.timetable_row_lecture_mentor_name)
+                    lectureLocation = target.findViewById(R.id.timetable_row_lecture_location)
+                }
+            }
+        }
+    }
+
+
 
 
     class CarParkViewHolder(itemView: View, private val cpList: CarParkList) :
