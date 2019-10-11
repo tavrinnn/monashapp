@@ -5,13 +5,21 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.monash.monashuniapp.Models.APILayer
 import com.monash.monashuniapp.Models.UserPortal
+import com.monash.monashuniapp.Views.MainScreenAdapter
 
 class MainActivity : AppCompatActivity() {
 
     // If we were connecting to an API we would define our retrofit builder up here which pointed to
     // an interface which defines all our endpoints we want to access. The compositedisopsable would be defined here too.
 
+    // Recycler View stuff
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     /* void getdata()
      * inside this function the requestinteface would be added, we would add the observable to the main thread, subscribeon IO scheduler and the subscribe callback would point to
@@ -27,6 +35,23 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setSubtitle(usr.currentWeek)
 
 
+        // Create some data for the api
+        val api = APILayer()
+
+        viewManager = LinearLayoutManager(this)
+        viewAdapter = MainScreenAdapter(
+            api.lectureList,
+            api.carParkList,
+            api.busList
+        )
+
+        recyclerView = findViewById<RecyclerView>(R.id.main_recycler_view).apply {
+
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewAdapter
+
+        }
     }
 
 
