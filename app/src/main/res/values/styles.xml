@@ -6,6 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Actionbar color themes here -->
+        <item name="titleTextColor">#222</item>
+        <item name="subtitleTextColor">#777</item>
     </style>
 
 </resources>

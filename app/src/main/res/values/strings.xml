@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">MonashUniApp</string>
+    <string name="app_name">testprojmonash</string>
+    <string name="ab_title_profile_label">View Profile</string>
+    <string name="ab_title_notification_label">Notifications</string>
 </resources>
