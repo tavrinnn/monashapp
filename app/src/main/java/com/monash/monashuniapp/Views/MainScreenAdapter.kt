@@ -11,10 +11,7 @@ import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.monash.monashuniapp.Models.BusList
-import com.monash.monashuniapp.Models.CarParkList
-import com.monash.monashuniapp.Models.Lecture
-import com.monash.monashuniapp.Models.LectureList
+import com.monash.monashuniapp.Models.*
 import com.monash.monashuniapp.R
 
 class MainScreenAdapter(// Internal data
@@ -97,8 +94,6 @@ class MainScreenAdapter(// Internal data
     }
 
 
-
-
     class CarParkViewHolder(itemView: View, private val cpList: CarParkList) :
         RecyclerView.ViewHolder(itemView) {
         // View for the carpark color codes.
@@ -143,10 +138,104 @@ class MainScreenAdapter(// Internal data
     }
 
 
+    class BusViewHolder(itemView: View, private val bList: BusList) :
+        RecyclerView.ViewHolder(itemView) {
+        private val busList: ListView
+
+        init {
+            busList = itemView.findViewById(R.id.bus_list_main_list)
+            busList.adapter = BusListAdapter(itemView.context)
+        }
+
+
+        // Internal Adapter for the timetable
+        private inner class BusListAdapter(private val context: Context) : BaseAdapter() {
+
+            override fun getCount(): Int {
+                return bList.response.size
+            }
+
+            override fun getItem(position: Int): Any {
+                return bList.response[position]
+            }
+
+            override fun getItemId(position: Int): Long {
+                return position.toLong()
+            }
+
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                var convertView = convertView
+                // inflate the layout for each list row
+                if (convertView == null) {
+                    convertView =
+                        LayoutInflater.from(context).inflate(R.layout.bus_row, parent, false)
+
+                    // Tag the view id's so we don't unnecessarily look for them again in future if this object is not null...
+                    val vhx = ViewHolder()
+                    vhx.setIds(convertView!!)
+                    convertView.tag = vhx
+                }
+
+                drawRow(convertView, bList.response[position])
+
+                // returns the view for the current row
+                return convertView
+            }
+
+            private fun drawRow(view: View, bus: Bus) {
+                val vh = view.tag as ViewHolder
+                vh.source!!.text = bus.from
+                vh.destination!!.text = bus.to
+                vh.eta!!.text = bus.eta
+            }
+
+            inner class ViewHolder {
+                var source: TextView? = null
+                var destination: TextView? = null
+                var eta: TextView? = null
+
+                internal fun setIds(target: View) {
+                    source = target.findViewById(R.id.bus_row_source)
+                    destination = target.findViewById(R.id.bus_row_destination)
+                    eta = target.findViewById(R.id.bus_row_eta)
+                }
+            }
+        }
+    }
+
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return null;
+        var vh: RecyclerView.ViewHolder? = null
+
+        if (viewType == TIMETABLE_ID) {
+            vh = TimeTableViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.timetable,
+                    parent,
+                    false
+                ), lectureList
+            )
+        } else if (viewType == CARPARK_ID) {
+            vh = CarParkViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.car_parks,
+                    parent,
+                    false
+                ), carParkList
+            )
+
+        } else if (viewType == BUS_ID) {
+            vh = BusViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.bus_list,
+                    parent,
+                    false
+                ), busList
+            )
+        }
+
+        return vh!!
     }
 
 
