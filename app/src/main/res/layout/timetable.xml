@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tile_drop_shadow">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Today Button -->
+        <TextView   android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/lecture_heading_background"
+
+            android:text="TODAY"
+            android:textColor="#F2F2F2"
+            android:textStyle="bold"
+            android:textSize="14sp"/>
+
+        <!-- 3 dots -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <View android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/grey_dot"/>
+
+            <View android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/grey_dot"/>
+
+            <View android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:background="@drawable/grey_dot"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <ListView android:id="@+id/timetable_lecture_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>

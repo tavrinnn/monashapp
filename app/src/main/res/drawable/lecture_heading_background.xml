@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/holo_red_light"/>
 
-</selector>
+    <padding  android:top="6dp"
+        android:bottom="6dp"
+        android:left="12dp"
+        android:right="12dp" />
+
+    <!-- Top Left + Bottom right have more of a raduis -->
+    <corners android:bottomRightRadius="8dp"
+        android:bottomLeftRadius="2dp"
+        android:topLeftRadius="8dp"
+        android:topRightRadius="2dp" />
+</shape>
