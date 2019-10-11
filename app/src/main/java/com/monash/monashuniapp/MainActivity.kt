@@ -9,14 +9,13 @@ class MainActivity : AppCompatActivity() {
     // an interface which defines all our endpoints we want to access. The compositedisopsable would be defined here too.
 
 
-
     /* void getdata()
      * inside this function the requestinteface would be added, we would add the observable to the main thread, subscribeon IO scheduler and the subscribe callback would point to
      * our displayData() function.
      */
 
 
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
